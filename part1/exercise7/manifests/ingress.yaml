@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: part1exercise7-ingress
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /log # localhost:8081/log
+          pathType: Prefix
+          backend:
+            service:
+              name: part1exercise7-svc
+              port:
+                number: 2345

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: part1exercise5-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: part1exercise5
+  template:
+    metadata:
+      labels:
+        app: part1exercise5
+    spec:
+      containers:
+        - name: part1exercise5
+          image: altrof/devops_kubernetes_course:1.05
+          imagePullPolicy: Always
+          env:
+            - name: VITE_APP_PAGE_TITLE
+              value: "Exercise 5 - Kubernetes course"

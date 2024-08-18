@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: part1exercise7-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: part1exercise7
+  template:
+    metadata:
+      labels:
+        app: part1exercise7
+    spec:
+      containers:
+        - name: part1exercise7
+          image: altrof/devops_kubernetes_course:1.07
+          imagePullPolicy: Always
+          env:
+            - name: PORT
+              value: "9901"
