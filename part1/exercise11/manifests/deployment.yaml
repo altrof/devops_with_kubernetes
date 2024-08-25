@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timestamp-log-with-pingpong-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timestamp-log-with-pingpong
+  template:
+    metadata:
+      labels:
+        app: timestamp-log-with-pingpong
+    spec:
+      volumes:
+        - name: shared-files
+          persistentVolumeClaim:
+            claimName: pingpong-and-timestamp-log-claim
+      containers:
+        - name: pingpong
+          imagePullPolicy: Always
+          image: altrof/devops_kubernetes_course:1.11-app1-pingpong
+          env:
+            - name: MOUNT_PATH
+              value: "/usr/src/app/files"
+            - name: PORT
+              value: "9902"
+          volumeMounts:
+            - name: shared-files
+              mountPath: /usr/src/app/files
+        - name: timestamp-generator
+          imagePullPolicy: Always
+          image: altrof/devops_kubernetes_course:1.10-app1-timestamp-generator
+          env:
+            - name: MOUNT_PATH
+              value: "/usr/src/app/files"
+            - name: PORT
+              value: "9903"
+          volumeMounts:
+            - name: shared-files
+              mountPath: /usr/src/app/files
+        - name: timestamp-with-pingpong-reader
+          imagePullPolicy: Always
+          image: altrof/devops_kubernetes_course:1.11-timestamp-with-pingpong-reader
+          env:
+            - name: MOUNT_PATH
+              value: "/usr/src/app/files"
+            - name: PORT
+              value: "9901"
+          volumeMounts:
+            - name: shared-files
+              mountPath: /usr/src/app/files

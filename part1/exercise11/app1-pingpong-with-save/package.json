@@ -1,0 +1,11 @@
+{
+  "name": "exercise11",
+  "version": "1.0.0",
+  "description": "PingPong app with TimestampLog app share volume via PersistanceVolumeClaim ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "altrof",
+  "license": "ISC"
+}

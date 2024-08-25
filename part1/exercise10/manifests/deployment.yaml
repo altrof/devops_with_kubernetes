@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timestamp-log-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timestamp-log
+  template:
+    metadata:
+      labels:
+        app: timestamp-log
+    spec:
+      volumes:
+        - name: shared-files
+          emptyDir: {}
+      containers:
+        - name: timestamp-generator
+          imagePullPolicy: Always
+          image: altrof/devops_kubernetes_course:1.10-app1-timestamp-generator
+          env:
+            - name: MOUNT_PATH
+              value: "/usr/src/app/files"
+          volumeMounts:
+            - mountPath: /usr/src/app/files
+              name: shared-files
+        - name: timestamp-reader
+          imagePullPolicy: Always
+          image: altrof/devops_kubernetes_course:1.10-app2-timestamp-reader
+          env:
+            - name: MOUNT_PATH
+              value: "/usr/src/app/files"
+            - name: PORT
+              value: "9901"
+          volumeMounts:
+            - mountPath: /usr/src/app/files
+              name: shared-files

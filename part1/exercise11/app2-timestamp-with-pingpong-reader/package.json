@@ -1,0 +1,11 @@
+{
+  "name": "e11-app2-timestamp-with-pingpong-reader",
+  "version": "1.0.0",
+  "description": "Timestamp and PingPong Reader ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "altrof",
+  "license": "ISC"
+}

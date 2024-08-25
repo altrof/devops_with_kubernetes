@@ -1,0 +1,11 @@
+{
+  "name": "e10-app2-timestamp-reader",
+  "version": "1.0.0",
+  "description": "Timestamp Reader ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "altrof",
+  "license": "ISC"
+}
